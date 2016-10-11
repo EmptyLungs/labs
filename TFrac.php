@@ -111,13 +111,13 @@ class TFrac
     public function compare($TFrac){
         if ($this->a == $TFrac->a && $this->b == $TFrac->b) return true;
     }
-    public function bigger($TFrac){
+    public function isBigger($TFrac){
         if ($this->a/$this->b > $TFrac->a/$TFrac->b) return true;
     }
-    public function outAStr(){
+    public function getA(){
         return "$this->a";
     }
-    public function outBSstr(){
+    public function getB(){
         return "$this->b";
     }
     public function __toString()
