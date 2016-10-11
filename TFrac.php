@@ -65,9 +65,7 @@ class TFrac
         return new self($a, $b);
     }
     public function copy(){
-        $a = $this->a;
-        $b = $this->b;
-        return $this->getByInt($a, $b);
+        return new self($this->a, $this->b);
     }
 
     public function add($TFrac){
@@ -129,35 +127,3 @@ class TFrac
 
 
 }
-$foo = TFrac::getByInt(6,10);
-echo "$foo \n";
-
-$foo1 = TFrac::getByString('20/10');
-echo "$foo1 \n";
-
-$z = $foo1->add($foo);
-echo "$foo1+$foo = $z \n";
-
-$y = $foo1->minus($foo);
-echo "$foo1-$foo = $y \n";
-
-$w = $foo->div($foo1);
-echo "$foo/$foo1=$w \n";
-
-$zz = $foo->mult($foo1);
-echo "$foo*$foo1=$zz \n";
-
-$zzz = $foo->pow();
-echo "$foo v kvadrate = $zzz \n";
-
-$ws = $foo->copy();
-$bool1 = $foo->compare($ws);
-echo "$foo = $ws:\n";
-var_dump($bool1);
-
-$bool2 = $foo1->bigger($foo);
-echo "$foo1 > $foo:\n";
-var_dump($bool2);
-
-$u = $foo->reverse();
-echo "$foo reverse = $u";
