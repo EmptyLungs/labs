@@ -104,9 +104,8 @@ class TFrac
         return $this->mult($this);
     }
     public function reverse(){ //ask p
-        $ff = clone $this;
-        $z = new self(1,1);
-        return $z->div($ff);
+        if ($this->a != 0)
+        return new self($this->b, $this->a);
     }
     public function compare($TFrac){
         if ($this->a == $TFrac->a && $this->b == $TFrac->b) return true;
