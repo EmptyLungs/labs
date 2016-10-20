@@ -6,9 +6,7 @@
  * Date: 19.10.2016
  * Time: 7:22
  */
-include "TPNumber.php";
-include "TComplex.php";
-include "TFrac.php";
+include "autoload.php";
 
 class TMemory
 {
