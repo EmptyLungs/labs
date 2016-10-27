@@ -50,24 +50,6 @@ class TFrac
         }
     }
 
-
-    public static function getByString($string){
-        list($a, $b) = explode('/', $string);
-        if ($b!=0)
-        return new self($a, $b);
-        else
-            echo "new $a/$b divide by zero";
-            return null;
-    }
-
-    public static function getByInt($a, $b){
-        if ($b!=0)
-        return new self($a, $b);
-        else {
-            echo "new $a/$b divide by zero";
-            return null;
-        }
-    }
     public function copy(){
         return new self($this->a, $this->b);
     }
@@ -119,14 +101,10 @@ class TFrac
         }
     }
     public function compare($TFrac){
-        if ($this->a == $TFrac->a && $this->b == $TFrac->b) return true;
-        else
-            return false;
+        return ($this->a == $TFrac->a && $this->b == $TFrac->b)
     }
     public function isBigger($TFrac){
-        if ($this->a/$this->b > $TFrac->a/$TFrac->b) return true;
-        else
-            return false;
+        return ($this->a/$this->b > $TFrac->a/$TFrac->b);
     }
     public function minus($TFrac){
         return new self(-$TFrac->a, $TFrac->b);
