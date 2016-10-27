@@ -8,14 +8,9 @@
  */
 class TFrac
 {
-    public $a;
-    public $b;
+    private $a;
+    private $b;
 
-    /**
-     * @param $a
-     * @param $b
-     * @return mixed общий делитель
-     */
     private function euc($a, $b) {
         while ($a != $b)
             if ($a>$b)
@@ -25,9 +20,6 @@ class TFrac
         return $a;
     }
 
-    /**
-     * сокращение дроби
-     */
     private function dev(){
         if ($this->a!=0) {
             $z = $this->euc($this->a, $this->b);
@@ -36,35 +28,38 @@ class TFrac
         }
     }
 
-    /**
-     * TFrac constructor.
-     * @param $ina int ислитель
-     * @param $inb int знаминатель
-     */
-    public function __construct($ina, $inb){
-        $this->a = $ina;
-        $this->b = $inb;
-        $this->dev();
+
+
+    public function __construct(){
+        $params = func_get_args();
+        $num = func_num_args();
+        if ($num == 1){
+            list($a, $b) = explode('/', $params[0]);
+            if ($b != 0) {
+                $this->a = $a;
+                $this->b = $b;
+                $this->dev();
+            }  else {
+                throw new Exception('div by 0');
+            }
+        } elseif ($num == 2) {
+            if ($params[1] == 0) throw new Exception('div by 0');
+            $this->a = $params[0];
+            $this->b = $params[1];
+            $this->dev();
+        }
     }
 
-    /**
-     * @param $string string входная строка
-     * @return TFrac дробь
-     */
+
     public static function getByString($string){
         list($a, $b) = explode('/', $string);
-                if ($b!=0)
+        if ($b!=0)
         return new self($a, $b);
         else
             echo "new $a/$b divide by zero";
             return null;
     }
 
-    /**
-     * @param $a int числитель
-     * @param $b int знаминатель
-     * @return TFrac дробь
-     */
     public static function getByInt($a, $b){
         if ($b!=0)
         return new self($a, $b);
@@ -93,7 +88,8 @@ class TFrac
 
         return new self($a,$b);
     }
-    public function sub($TFrac){
+
+    public function sub($TFrac){ 
         $b = $TFrac->b * $this->b;
         if ($this->b > $TFrac->b){
             $a = $this->a - $TFrac->a * $this->b;
@@ -101,7 +97,10 @@ class TFrac
             $a = $this->a * $TFrac->b - $TFrac->a;
         }
         return new self($a, $b);
-    
+    }
+    public function suba($TFrac){
+        return $this->add($this->minus($TFrac));
+    }
     public function div($TFrac){
         $a = $this->a * $TFrac->b;
         $b = $this->b * $TFrac->a;
@@ -111,7 +110,7 @@ class TFrac
     public function pow(){
         return $this->mult($this);
     }
-    public function reverse(){ //ask p
+    public function reverse(){ 
         if($this->a!=0)
         return new self($this->b, $this->a);
         else {
@@ -129,6 +128,9 @@ class TFrac
         else
             return false;
     }
+    public function minus($TFrac){
+        return new self(-$TFrac->a, $TFrac->b);
+    }
     public function getA(){
         return "$this->a";
     }
@@ -139,6 +141,13 @@ class TFrac
     {
         return "$this->a/$this->b";
     }
+}
 
-
+//exec
+try {
+    $foo = new TFrac('1/3');
+    $foo = new TFrac(1, 0);
+    echo $foo;
+} catch(Exception $e) {
+    echo $e->getMessage();
 }
